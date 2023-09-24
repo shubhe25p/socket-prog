@@ -58,6 +58,8 @@ void *ip_protocol_loop(void *arg)
       {
          printf("got an IP frame from %d.%d.%d.%d, queued timer %d\n",
                   buf[12],buf[13],buf[14],buf[15],timer_no);
+         printf("got an IP frame from %d.%d.%d.%d, queued timer %d\n",
+                  buf[16],buf[17],buf[18],buf[19],timer_no);
          ip_queue.timer(10,timer_no);
          timer_no++;
       }

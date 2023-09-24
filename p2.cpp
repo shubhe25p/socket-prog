@@ -44,6 +44,26 @@ void *protocol_loop(void *arg)
 //
 // Toy function to print something interesting when an IP frame arrives
 //
+
+/*
++---------------------+----------------+----------------+------------------+
+|    Version (4 bits) |  Header Length (4 bits)  |  Type of Service (8bits) | Total Length (16 bits) |
++---------------------+----------------+----------------+------------------+
+| Identification (16 bits) | Flags (3 bits) | Fragment Offset (13 bits) |
++---------------------+----------------+----------------+------------------+
+|  Time to Live (TTL, 8 bits) | Protocol (8 bits) | Header Checksum (16 bits) |
++---------------------+----------------+----------------+------------------+
+|                      Source IP Address (32 bits)                         |
++------------------------------------------------------------------------+
+|                   Destination IP Address (32 bits)                      |
++------------------------------------------------------------------------+
+|                       Options (if any, variable length)                   |
++------------------------------------------------------------------------+
+|                        Data (payload, variable length)                     |
++------------------------------------------------------------------------+
+
+
+*/
 void *ip_protocol_loop(void *arg)
 {
    octet buf[1500];
@@ -100,7 +120,7 @@ int main()
 {
    net.open_net("eno0");
    pthread_create(&loop_thread,NULL,protocol_loop,NULL);
-   pthread_create(&arp_thread,NULL,arp_protocol_loop,NULL);
+   // pthread_create(&arp_thread,NULL,arp_protocol_loop,NULL);
    pthread_create(&ip_thread,NULL,ip_protocol_loop,NULL);
    for ( ; ; )
       sleep(1);
