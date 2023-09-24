@@ -118,7 +118,7 @@ pthread_t loop_thread, arp_thread, ip_thread;
 //
 int main()
 {
-   net.open_net("eno0");
+   net.open_net("enp0s1");
    pthread_create(&loop_thread,NULL,protocol_loop,NULL);
    // pthread_create(&arp_thread,NULL,arp_protocol_loop,NULL);
    pthread_create(&ip_thread,NULL,ip_protocol_loop,NULL);
